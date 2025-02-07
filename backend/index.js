@@ -18,6 +18,9 @@ app.use(cors({
     credentials: true
 }))
 
+// routes
+app.use('/api/auth', require('./routes/user/userRoutes'))
+
 main().then(() => console.log("DataBase Connected")).catch(err => console.log(err))
 
 async function main() {
