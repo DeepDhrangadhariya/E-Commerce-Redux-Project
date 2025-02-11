@@ -1,7 +1,6 @@
 const express = require('express')
 const routes = express.Router()
 const userCtrl = require('../../controller/user/userCtrl')
-const { verifyToken } = require('../../middleware/verifyToken')
 
 routes.get('/getusers', userCtrl.getAllUsers)
 
