@@ -50,6 +50,6 @@ userSchema.methods.comparePassword = function (password) {
     return bcrypt.compare(password, this.password)
 }
 
-const userTable = new mongoose.model("user", userSchema)
+const userTable = mongoose.model("User", userSchema)
 
 module.exports = userTable

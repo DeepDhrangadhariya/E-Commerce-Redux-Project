@@ -20,6 +20,7 @@ app.use(cors({
 
 // routes
 app.use('/api/auth', require('./routes/user/userRoutes'))
+app.use('/api/products', require('./routes/products/productsRoutes'))
 
 main().then(() => console.log("DataBase Connected")).catch(err => console.log(err))
 
