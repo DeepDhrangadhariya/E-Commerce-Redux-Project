@@ -1,4 +1,4 @@
-const prodcutTable = require("../../model/productsSchema")
+const productTable = require("../../model/productsSchema")
 const reviewsTable = require("../../model/reviewsSchema")
 
 module.exports.postNewReview = async (req, res) => {
@@ -29,7 +29,7 @@ module.exports.postNewReview = async (req, res) => {
             const totalRating = reviews.reduce((acc, review) => acc + review.rating, 0)
             const averageRating = totalRating / reviews.length
 
-            const product = await prodcutTable.findById(productId)
+            const product = await productTable.findById(productId)
             if (product) {
                 product.rating = averageRating
                 await product.save({ validateBeforeSave: false })

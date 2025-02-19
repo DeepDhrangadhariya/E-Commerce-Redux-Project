@@ -35,6 +35,6 @@ const productSchema = new mongoose.Schema({
     }
 })
 
-const prodcutTable = mongoose.model('Product', productSchema)
+const productTable = mongoose.model('Product', productSchema)
 
-module.exports = prodcutTable
+module.exports = productTable

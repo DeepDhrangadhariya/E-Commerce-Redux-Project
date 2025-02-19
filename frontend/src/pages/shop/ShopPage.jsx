@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import productsData from '../../data/products.json'
+// import productsData from '../../data/products.json'
 import ProductCards from './ProductCards'
 import ShopFiltering from './ShopFiltering'
 import { useFetchAllProductsQuery } from '../../redux/features/products/productAPI'
@@ -28,7 +28,7 @@ const ShopPage = () => {
     const [productsPerPage] = useState(8)
 
     const { category, color, priceRange } = filtersState
-    const [minPrice, maxPrice] = priceRange.split('-').map(Number)
+    const [minPrice, maxPrice] = priceRange ? priceRange.split('-').map(Number) : [0, Infinity];
 
     const { data: { products = [], totalPages, totalProducts } = {}, error, isLoading } = useFetchAllProductsQuery({
         category: category !== 'all' ? category : '',
@@ -57,7 +57,7 @@ const ShopPage = () => {
     //     // filter by pricerange
     //     if (filtersState.priceRange) {
     //         const [minPrice, maxPrice] = filtersState.priceRange.split('-').map(Number)
-    //         filteredProducts = filteredProducts.filter(prodcut => prodcut.price >= minPrice && prodcut.price <= maxPrice)
+    //         filteredProducts = filteredProducts.filter(product => product.price >= minPrice && product.price <= maxPrice)
     //     }
 
     //     setProducts(filteredProducts)

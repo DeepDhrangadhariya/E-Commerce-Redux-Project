@@ -10,7 +10,7 @@ module.exports.createProduct = async (req, res) => {
         const savedProduct = await newProduct.save()
 
         // calculate reviews
-        const reviews = await reviewsTable.find({ prodcutId: savedProduct._id })
+        const reviews = await reviewsTable.find({ productId: savedProduct._id })
         if (reviews.length > 0) {
             const totalRating = reviews.reduce((acc, review) => acc + review.rating, 0)
             const averageRating = totalRating / reviews.length
@@ -18,7 +18,7 @@ module.exports.createProduct = async (req, res) => {
             await savedProduct.save()
         }
 
-        res.status(200).send(savedProduct)
+        res.status(201).send(savedProduct)
     } catch (error) {
         console.error("Error At Create Product, ", error)
         res.status(500).send({ message: "Error At Create Product" })
@@ -60,12 +60,12 @@ module.exports.getAllProducts = async (req, res) => {
 
 module.exports.getSingleProduct = async (req, res) => {
     try {
-        const prodcutId = req.params.id
-        const product = await productSchema.findById(prodcutId).populate('author', 'email userName')
+        const productId = req.params.id
+        const product = await productSchema.findById(productId).populate('author', 'email userName')
         if (!product) {
             return res.status(404).send({ message: "Product Not Found" })
         }
-        const reviews = await reviewsTable.find({ prodcutId }).populate('userId', 'userName email')
+        const reviews = await reviewsTable.find({ productId }).populate('userId', 'userName email')
 
         res.status(200).send({ product, reviews })
     } catch (error) {
@@ -100,7 +100,7 @@ module.exports.deleteProduct = async (req, res) => {
         }
 
         // delete reviews of this product
-        await reviewsTable.deleteMany({ prodcutId: productId })
+        await reviewsTable.deleteMany({ productId: productId })
 
         res.status(200).send({ message: "Product Deleted Successfully" })
     } catch (error) {
