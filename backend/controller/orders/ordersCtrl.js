@@ -8,7 +8,7 @@ module.exports.createCheckoutSession = async (req, res) => {
         const lineItems = products.map((product) => ({
             price_data: {
                 currency: "usd",
-                products_data: {
+                product_data: {
                     name: product.name,
                     images: [product.image]
                 },
@@ -18,7 +18,7 @@ module.exports.createCheckoutSession = async (req, res) => {
         }))
 
         const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['cart'],
+            payment_method_types: ['card'],
             line_items: lineItems,
             mode: 'payment',
             success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
