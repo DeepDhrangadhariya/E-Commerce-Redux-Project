@@ -23,7 +23,7 @@ app.use('/api/auth', require('./routes/user/userRoutes'))
 app.use('/api/products', require('./routes/products/productsRoutes'))
 app.use('/api/reviews', require('./routes/reviews/reviewsRoutes'))
 app.use('/api/orders', require('./routes/orders/ordersRoutes'))
-app.use('/api/stats', require('./routes/stats/statesRoute'))
+app.use('/api/stats', require('./routes/stats/statsRoute'))
 
 main().then(() => console.log("DataBase Connected")).catch(err => console.log(err))
 
