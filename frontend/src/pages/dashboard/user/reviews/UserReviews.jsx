@@ -14,7 +14,7 @@ const UserReviews = () => {
     }
     
     if(isLoading) return <div>Loading...</div>
-    if(error) return <div>Failed To Found Reviews</div>
+    if(error) return <div>No Reviews Found</div>
 
     return (
         <div className='py-6'>

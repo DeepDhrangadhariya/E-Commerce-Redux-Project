@@ -15,6 +15,7 @@ import UserOrders from "../pages/dashboard/user/Orders/UserOrders";
 import OrderDetails from "../pages/dashboard/user/Orders/OrderDetails";
 import UserPayments from "../pages/dashboard/user/payments/UserPayments";
 import UserReviews from "../pages/dashboard/user/reviews/UserReviews";
+import UserProfile from "../pages/dashboard/user/profile/UserProfile";
 
 const router = createBrowserRouter([
     {
@@ -50,7 +51,7 @@ const router = createBrowserRouter([
             { path: '', element: <UserDashboardMain /> },
             { path: 'orders', element: <UserOrders /> },
             { path: 'payments', element: <UserPayments /> },
-            { path: 'profile', element: <div>User Profile</div> },
+            { path: 'profile', element: <UserProfile /> },
             { path: 'reviews', element: <UserReviews /> },
 
             // admin rotes
