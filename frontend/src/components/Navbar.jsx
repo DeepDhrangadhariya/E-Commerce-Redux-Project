@@ -36,7 +36,7 @@ const Navbar = () => {
         {label: 'Dashboard', path: '/dashboard/admin'},
         {label: 'Manage Items', path: '/dashboard/manage-products'},
         {label: 'All Orders', path: '/dashboard/manage-orders'},
-        {label: 'Add New Post', path: '/dashboard/add-new-post'},
+        {label: 'Add Product', path: '/dashboard/add-product'},
     ]
 
     // user dropDown menus
