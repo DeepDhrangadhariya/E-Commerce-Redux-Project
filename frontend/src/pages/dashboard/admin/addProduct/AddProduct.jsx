@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux'
 import TextInput from './TextInput'
 import SelectInput from './SelectInput'
 import UploadImage from './UploadImage'
+import { useAddProductMutation } from '../../../../redux/features/products/productAPI'
+import { useNavigate } from 'react-router-dom'
 
 const categories = [
     { label: 'Select Category', value: '' },
@@ -36,6 +38,9 @@ const AddProduct = () => {
     })
 
     const [image, setImage] = useState('')
+    const [addProduct, { isLoading, error }] = useAddProductMutation()
+
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -45,8 +50,28 @@ const AddProduct = () => {
         })
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        if (!product.name || !product.category || !product.price || !product.description || !product.color) {
+            alert('Please fill all the required fields')
+            return
+        }
 
+        try {
+            await addProduct({ ...product, image, author: user?._id }).unwrap()
+            alert('Product added successfully')
+            setProduct({
+                name: '',
+                category: '',
+                color: '',
+                price: '',
+                description: '',
+            })
+            setImage('')
+            navigate('/shop')
+        } catch (error) {
+            console.error("Failed to submit, ", error)
+        }
     }
 
     return (
@@ -93,6 +118,29 @@ const AddProduct = () => {
                     placeholder='Upload Image'
                     setImage={setImage}
                 />
+
+                <div>
+                    <label
+                        htmlFor='description'
+                        className='block text-sm font-medium text-gray-700'
+                    >Description</label>
+                    <textarea
+                        name="description"
+                        id="description"
+                        className='add-product-InputCSS'
+                        value={product.description}
+                        placeholder='Write a product description'
+                        onChange={handleChange}
+
+                    ></textarea>
+                </div>
+
+                <div>
+                    <button
+                        type='submit'
+                        className='add-product-btn'
+                    >Add Product</button>
+                </div>
             </form>
         </div>
     )
