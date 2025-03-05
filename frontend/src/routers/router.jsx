@@ -18,6 +18,7 @@ import UserReviews from "../pages/dashboard/user/reviews/UserReviews";
 import UserProfile from "../pages/dashboard/user/profile/UserProfile";
 import AdminDashboardMain from "../pages/dashboard/admin/dashboard/AdminDashboardMain";
 import AddProduct from "../pages/dashboard/admin/addProduct/AddProduct";
+import ManageProduct from "../pages/dashboard/admin/manageProduct/ManageProduct";
 
 const router = createBrowserRouter([
     {
@@ -59,7 +60,7 @@ const router = createBrowserRouter([
             // admin routes
             { path: 'admin', element: <PrivateRoute role="admin"> <AdminDashboardMain /> </PrivateRoute> },
             { path: 'add-product', element: <PrivateRoute role="admin"> <AddProduct /> </PrivateRoute> },
-            { path: 'manage-products', element: <PrivateRoute role="admin"> <div>Manage Post</div> </PrivateRoute> },
+            { path: 'manage-products', element: <PrivateRoute role="admin"> <ManageProduct /> </PrivateRoute> },
             { path: 'update-product/:id', element: <PrivateRoute role="admin"> <div>Update Post</div> </PrivateRoute> },
             { path: 'users', element: <PrivateRoute role="admin"> <div>All Users</div> </PrivateRoute> },
             { path: 'manage-orders', element: <PrivateRoute role="admin"> <div>Manage Orders</div> </PrivateRoute> },

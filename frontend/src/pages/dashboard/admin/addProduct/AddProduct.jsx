@@ -58,7 +58,7 @@ const AddProduct = () => {
         }
 
         try {
-            await addProduct({ ...product, image, author: user?._id }).unwrap()
+            await addProduct({ ...product, image, author: user?._id, createdAt: new Date }).unwrap()
             alert('Product added successfully')
             setProduct({
                 name: '',
