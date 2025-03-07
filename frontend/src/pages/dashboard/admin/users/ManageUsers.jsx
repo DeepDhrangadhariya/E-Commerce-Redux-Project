@@ -86,7 +86,7 @@ const ManageUsers = () => {
                                                 </td>
                                                 <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                                     <span
-                                                        className={`rounded-full py-[2px] px-3 ${user?.role === 'admin'
+                                                        className={`rounded-full py-[2px] px-3 capitalize ${user?.role === 'admin'
                                                             ? 'bg-indigo-500 text-white'
                                                             : 'bg-amber-300'
                                                         }`}
