@@ -1,43 +1,35 @@
 import React, { useState } from 'react'
-import { useDeleteProductMutation, useFetchAllProductsQuery } from '../../../../redux/features/products/productAPI'
-import { formateDate } from '../../../../utils/formateDate'
-import { Link } from 'react-router-dom'
+import { useDeleteUserMutation, useGetUserQuery } from '../../../../redux/features/auth/authAPI'
+import UpdateUserModal from './UpdateUserModal'
 
-const ManageProduct = () => {
+const ManageUsers = () => {
 
-    const [currentPage, setCurrentPage] = useState(1)
-    const [productsPerPage] = useState(12)
-    const { data: { products = [], totalPages, totalProducts } = {}, isLoading, error, refetch } = useFetchAllProductsQuery({
-        category: '',
-        color: '',
-        minPrice: '',
-        maxPrice: '',
-        page: currentPage,
-        limit: productsPerPage
-    })
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [selectedUser, setSelectedUser] = useState(null)
 
-    // pagination
-    const startProduct = (currentPage - 1) * productsPerPage + 1
-    const endProduct = startProduct + products.length - 1
+    const { data: usersData = [], error, isLoading, refetch } = useGetUserQuery()
+    const users = usersData?.users
 
-    const handlePageChange = (pageNumber) => {
-        if (pageNumber > 0 && pageNumber <= totalPages) {
-            setCurrentPage(pageNumber)
+    const [deleteUser] = useDeleteUserMutation()
+
+    const handleDelete = async (id) => {
+        try {
+            const response = await deleteUser(id).unwrap()
+            alert('User deleted successfull')
+            refetch()
+        } catch (error) {
+            console.error("Failed to delete user, ", error)
         }
     }
 
-    const [deleteProduct] = useDeleteProductMutation()
+    const handleEdit = (user) => {
+        setSelectedUser(user)
+        setIsModalOpen(true)
+    }
 
-    const handleDeleteProduct = async (id) => {
-        try {
-
-            const response = await deleteProduct(id).unwrap()
-            alert('product deleted successfully')
-            await refetch()
-
-        } catch (error) {
-            console.error("error deleting product, ", error)
-        }
+    const handleCloseModal = () => {
+        setSelectedUser(null)
+        setIsModalOpen(false)
     }
 
     return (
@@ -46,7 +38,7 @@ const ManageProduct = () => {
                 isLoading && <div>Loading...</div>
             }
             {
-                error && <div>Error Loading Product.</div>
+                error && <div>Error Loading Users.</div>
             }
 
             <section className="py-1 bg-blueGray-50">
@@ -55,10 +47,9 @@ const ManageProduct = () => {
                         <div className="rounded-t mb-0 px-4 py-3 border-0">
                             <div className="flex flex-wrap items-center">
                                 <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-                                    <h3 className="font-semibold text-base text-blueGray-700">All Products</h3>
+                                    <h3 className="font-semibold text-base text-blueGray-700">All Users</h3>
                                 </div>
                             </div>
-                            <h3 className='my-4 text-sm'>Showing {startProduct} to {endProduct} of {totalProducts} products</h3>
                         </div>
 
                         <div className="block w-full overflow-x-auto">
@@ -69,10 +60,10 @@ const ManageProduct = () => {
                                             No.
                                         </th>
                                         <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                            Product Name
+                                            User Email
                                         </th>
                                         <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                            Publishing Date
+                                            User Role
                                         </th>
                                         <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                             Edit Or Manage
@@ -85,22 +76,32 @@ const ManageProduct = () => {
 
                                 <tbody>
                                     {
-                                        products && products.map((product, index) => (
+                                        users && users.map((user, index) => (
                                             <tr key={index}>
                                                 <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left text-blueGray-700 ">
                                                     {index + 1}
                                                 </th>
                                                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-                                                    {product?.name}
+                                                    {user?.email || 'N/A'}
                                                 </td>
                                                 <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                    {formateDate(product?.createdAt)}
+                                                    <span
+                                                        className={`rounded-full py-[2px] px-3 ${user?.role === 'admin'
+                                                            ? 'bg-indigo-500 text-white'
+                                                            : 'bg-amber-300'
+                                                        }`}
+                                                    >
+                                                        {user?.role}
+                                                    </span>
                                                 </td>
                                                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 cursor-pointer hover:text-primary">
-                                                    <Link to={`/dashboard/update-product/${product?._id}`}>Edit</Link>
+                                                    <button onClick={() => handleEdit(user)} className='flex gap-1 items-center hover:text-red-500'>
+                                                        <i className='ri-edit-2-line'></i>
+                                                        Edit
+                                                    </button>
                                                 </td>
                                                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                    <button onClick={() => handleDeleteProduct(product?._id)} className='bg-red-600 text-white px-2 py-1'>Delete</button>
+                                                    <button onClick={() => handleDelete(user?._id)} className='bg-red-600 text-white px-2 py-1'>Delete</button>
                                                 </td>
                                             </tr>
                                         ))
@@ -111,31 +112,13 @@ const ManageProduct = () => {
                         </div>
                     </div>
                 </div>
-
-                {/* pagination */}
-                <div className='mt-6 flex items-center justify-center'>
-                    <button
-                        disabled={currentPage === 1}
-                        onClick={() => handlePageChange(currentPage - 1)}
-                        className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md mr-2'
-                    >Previous</button>
-                    {
-                        [...Array(totalPages)].map((_, index) => (
-                            <button
-                                onClick={() => handlePageChange(index + 1)}
-                                className={`px-4 py-2 ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'} rounded-md mx-1`}
-                            >{index + 1}</button>
-                        ))
-                    }
-                    <button
-                        disabled={currentPage === totalPages}
-                        onClick={() => handlePageChange(currentPage + 1)}
-                        className='px-4 py-2 bg-gray-300 text-gray-700 rounded-md ml-2'
-                    >Next</button>
-                </div>
             </section>
+
+            {
+                isModalOpen && <UpdateUserModal user={selectedUser} onClose = {handleCloseModal} onRoleUpdate={refetch} />
+            }
         </>
     )
 }
 
-export default ManageProduct
+export default ManageUsers
