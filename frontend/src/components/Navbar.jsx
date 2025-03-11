@@ -66,8 +66,8 @@ const Navbar = () => {
                 <ul className="nav__links">
                     <li className="link"><Link to="/">Home</Link></li>
                     <li className="link"><Link to="/shop">Shop</Link></li>
-                    <li className="link"><Link to="/pages">Pages</Link></li>
-                    <li className="link"><Link to="/contact">Contact</Link></li>
+                    <li className="link"><Link to="/">Pages</Link></li>
+                    <li className="link"><Link to="/">Contact</Link></li>
                 </ul>
 
                 {/* Logo */}

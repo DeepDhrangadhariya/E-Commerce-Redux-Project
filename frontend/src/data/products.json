@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "67b351ddf99e705e3342ea34",
     "name": "Leather Handbag",
     "category": "accessories",
     "description": "Stylish leather handbag with ample storage space.",
@@ -12,7 +12,7 @@
     "author":"admin"
   },
   {
-    "id": 2,
+    "id": "67b351ddf99e705e3342ea35",
     "name": "Evening Gown",
     "category": "dress",
     "description": "Elegant evening gown for special occasions.",
@@ -23,7 +23,7 @@
     "rating": 4.0
   },
   {
-    "id": 3,
+    "id": "67b351ddf99e705e3342ea36",
     "name": "Gold Necklace",
     "category": "jewellery",
     "description": "Exquisite gold necklace with intricate design.",
@@ -33,7 +33,7 @@
     "rating": 4.7
   },
   {
-    "id": 4,
+    "id": "67b351ddf99e705e3342ea37",
     "name": "Matte Lipstick",
     "category": "cosmetics",
     "description": "Long-lasting matte lipstick in various shades.",
@@ -43,7 +43,7 @@
     "rating": 4.2
   },
   {
-    "id": 5,
+    "id": "67b351ddf99e705e3342ea38",
     "name": "Silk Scarf",
     "category": "accessories",
     "description": "Luxurious silk scarf with vibrant colors.",
@@ -54,7 +54,7 @@
     "rating": 4.3
   },
   {
-    "id": 6,
+    "id": "67b351ddf99e705e3342ea39",
     "name": "Cocktail Dress",
     "category": "dress",
     "description": "Chic cocktail dress for parties and events.",
@@ -64,7 +64,7 @@
     "rating": 4.4
   },
   {
-    "id": 7,
+    "id": "67b351ddf99e705e3342ea3a",
     "name": "Diamond Earrings",
     "category": "jewellery",
     "description": "Sparkling diamond earrings that add elegance to any outfit.",
@@ -75,7 +75,7 @@
     "rating": 4.8
   },
   {
-    "id": 8,
+    "id": "67b351ddf99e705e3342ea3b",
     "name": "Foundation",
     "category": "cosmetics",
     "description": "High-coverage foundation for a flawless finish.",
@@ -85,7 +85,7 @@
     "rating": 4.1
   },
   {
-    "id": 9,
+    "id": "67b351ddf99e705e3342ea3c",
     "name": "Sunglasses",
     "category": "accessories",
     "description": "Trendy sunglasses with UV protection.",
@@ -95,7 +95,7 @@
     "rating": 4.6
   },
   {
-    "id": 10,
+    "id": "67b351ddf99e705e3342ea3d",
     "name": "Casual Pants",
     "category": "dress",
     "description": "Comfortable maxi dress for casual outings.",
