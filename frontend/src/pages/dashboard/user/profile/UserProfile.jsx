@@ -63,8 +63,8 @@ const UserProfile = () => {
     return (
         <div className='container mx-auto p-6'>
             <div className='bg-white shadow-md rounded-lg p-6'>
-                <div className='flex items-center mb-4'>
-                    <img src={formData?.profileImage || avatarImg} alt="" className='w-32 h-32 object-cover rounded-full' />
+                <div className='flex flex-col md:flex-row items-center mb-4 gap-5'>
+                    <img src={formData?.profileImage || avatarImg} alt="" className='w-36 h-36 object-cover rounded-full' />
                     <div className='ml-6'>
                         <h3 className='text-2xl font-bold'>Username: {formData?.userName || 'N/A'}</h3>
                         <p className='text-gray-700'>User Bio: {formData?.bio || 'N/A'}</p>

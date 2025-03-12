@@ -55,61 +55,90 @@ const ManageOrders = () => {
     if (error) return <div>Something Went Wrong</div>
 
     return (
-        <div className='section__container p-6'>
-            <h2 className='text-2xl font-semibold mb-4'>Manage Orders</h2>
-            <table className='min-w-full bg-white border border-gray-200 rounded-lg'>
-                <thead className='bg-gray-100'>
-                    <tr>
-                        <th className='py-3 px-4 border-b'>Order Id</th>
-                        <th className='py-3 px-4 border-b'>Customer</th>
-                        <th className='py-3 px-4 border-b'>Status</th>
-                        <th className='py-3 px-4 border-b'>Date</th>
-                        <th className='py-3 px-4 border-b'>Actions</th>
-                    </tr>
-                </thead>
+        <>
+            <section className="py-1 bg-blueGray-50">
+                <div className="w-full mb-12 xl:mb-0 px-4 mx-auto">
+                    <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
+                        <div className="rounded-t mb-0 px-4 py-3 border-0">
+                            <div className="flex flex-wrap items-center">
+                                <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+                                    <h3 className="font-semibold text-base text-blueGray-700">Manage Orders</h3>
+                                </div>
+                            </div>
+                        </div>
 
-                <tbody>
-                    {
-                        orders && orders?.map((order, index) => (
-                            <tr key={index} className='border-b'>
-                                <td className='py-3 px-4 border-b'>{order?.orderId}</td>
-                                <td className='py-3 px-4 border-b'>{order?.email}</td>
-                                <td className='py-3 px-4 border-b'>
-                                    <span
-                                        className={`inline-block px-3 py-1 text-sm text-white rounded-full capitalize ${getStatusColor(order?.status)}`}
-                                    >{order?.status}</span>
-                                </td>
-                                <td className='py-3 px-4 border-b'>{formateDate(order?.updatedAt)}</td>
-                                <td className='py-4 px-4  flex items-center space-x-4'>
-                                    <Link to='#' className='text-blue-500 hover:underline'>View</Link>
+                        <div className="block w-full overflow-x-auto">
+                            <table className="items-center bg-transparent w-full border-collapse ">
+                                <thead>
+                                    <tr>
+                                        <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            Order Id.
+                                        </th>
+                                        <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            Customer
+                                        </th>
+                                        <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            Status
+                                        </th>
+                                        <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            Date
+                                        </th>
+                                        <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
 
-                                    <button
-                                        onClick={() => handleEditOrder(order)}
-                                        className='text-green-500 hover:underline'
-                                    >Edit</button>
+                                <tbody>
+                                    {
+                                        orders && orders?.map((order, index) => (
+                                            <tr key={index} className='border-b'>
+                                                <td className='py-3 px-4 border-b'>{order?.orderId}</td>
+                                                <td className='py-3 px-4 border-b'>{order?.email}</td>
+                                                <td className='py-3 px-4 border-b'>
+                                                    <span
+                                                        className={`inline-block px-3 py-1 text-sm text-white rounded-full capitalize ${getStatusColor(order?.status)}`}
+                                                    >{order?.status}</span>
+                                                </td>
+                                                <td className='py-3 px-4 border-b'>{formateDate(order?.updatedAt)}</td>
+                                                <td className='py-4 px-4  flex items-center space-x-4'>
+                                                    <Link to='#' className='text-blue-500 hover:underline'>View</Link>
 
-                                    <button
-                                        onClick={() => handleDeleteOrder(order?._id)}
-                                        className='text-red-500 hover:underline'
-                                    >Delete</button>
-                                </td>
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </table>
+                                                    <button
+                                                        onClick={() => handleEditOrder(order)}
+                                                        className='text-green-500 hover:underline'
+                                                    >Edit</button>
 
-            {/* update order modal */}
-            {
-                selectedOrder && (
-                    <UpdateOrderModal
-                        order={selectedOrder}
-                        isOpen = {isModalOpen}
-                        onClose = {handleCloseModal}
-                    />
-                )
-            }
-        </div>
+                                                    <button
+                                                        onClick={() => handleDeleteOrder(order?._id)}
+                                                        className='text-red-500 hover:underline'
+                                                    >Delete</button>
+                                                </td>
+                                            </tr>
+                                        ))
+                                    }
+                                </tbody>
+
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                            {/* update order modal */}
+                            {
+                                selectedOrder && (
+                                    <UpdateOrderModal
+                                        order={selectedOrder}
+                                        isOpen={isModalOpen}
+                                        onClose={handleCloseModal}
+                                    />
+                                )
+                            }
+            </section>
+
+
+           
+        </>
     )
 }
 
