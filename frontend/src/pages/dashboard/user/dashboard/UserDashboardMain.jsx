@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Bar } from 'react-chartjs-2'
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js'
-import { useGetUserStatsQuery } from '../../../../redux/features/stats/statsApi'
+import { useGetUserStatsQuery } from '../../../../redux/features/stats/statsAPI'
 import UserStats from './UserStats'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
