@@ -20,6 +20,7 @@ const SingleProduct = () => {
 
     const handleAddToCart = (product) => {
         dispatch(addToCart(product))
+        alert("item added to cart!")
     }
 
     if (isLoading) return <div>Loading...</div>

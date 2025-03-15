@@ -12,6 +12,7 @@ const ProductCards = ({ products }) => {
 
     const handleAddToCart = (product) => {
         dispatch(addToCart(product))
+        alert("item added to cart!")
     }
 
     return (

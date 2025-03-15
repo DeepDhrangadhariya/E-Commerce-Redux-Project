@@ -31,7 +31,7 @@ const UserDashboard = () => {
     return (
         <div className='space-y-5 bg-white p-8 md:h-screen flex flex-col justify-between'>
             <div>
-                <div className='nav__logo'>
+                <div className='nav__logo dash_logo'>
                     <Link to='/' style={{ fontSize: "1.8rem" }}>Deep's Ecom<span>.</span></Link>
                     <p className='text-xs italic'>User Dashboard</p>
                 </div>

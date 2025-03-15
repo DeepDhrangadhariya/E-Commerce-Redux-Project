@@ -558,6 +558,9 @@ nav {
     font-size: 1.2rem;
     margin-left: -5.8rem;
   }
+  .dash_logo a{
+    margin-left: 0;
+  }
   .categories__grid {
     grid-template-columns: repeat(2, 1fr);
   }
